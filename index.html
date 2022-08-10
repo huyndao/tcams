@@ -77,7 +77,7 @@
             delete camvars[i];
             document.querySelector(`#${i}`).remove();
             document.querySelector(`#div-${i}`).remove();
-        };
+        }
       
         let playCam = (i) => { 
             let cam_name = i.split("/")[4].split(".")[0];
@@ -129,7 +129,7 @@
                     }
                 }
 
-        window.onload = () => {camlist.map(playCam);};
+        window.onload = () => {camlist.map(playCam);}
     </script>
   </head>
   <body>
