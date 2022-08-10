@@ -71,11 +71,19 @@
         };
         let camvars = {};
         let hlsvars = {};
-
+        let killDiv = (i) => {
+            hlsvars[i].destroy();
+            delete hlsvars[i];
+            delete camvars[i];
+            document.querySelector(`#${i}`).remove();
+            document.querySelector(`#div-${i}`).remove();
+        };
+      
         let playCam = (i) => { 
             let cam_name = i.split("/")[4].split(".")[0];
             let viddiv = document.createElement("div");
             viddiv.className = "video";
+            viddiv.id = `div-${cam_name}`;
             viddiv.innerHTML = `<video id="${cam_name}" controls autoplay muted></video>`;
             document.body.appendChild(viddiv);
 
@@ -101,16 +109,21 @@
                                     switch(data.type) {
                                     case Hls.ErrorTypes.NETWORK_ERROR:
                                     // try to recover network error
-                                        console.log(`fatal network error encountered with ${cam_name}, try to recover`);
+                                        console.log(`fatal network error ${data.details} encountered with ${cam_name}, try to recover`);
                                         hlsvars[cam_name].startLoad();
+                                        if (data.details.toLowerCase() === "manifestloaderror")
+                                            {
+                                                killDiv(cam_name);
+                                            }
                                         break;
                                     case Hls.ErrorTypes.MEDIA_ERROR:
-                                        console.log(`fatal media error encountered with ${cam_name}, try to recover`);
+                                        console.log(`fatal media error ${data.details} encountered with ${cam_name}, try to recover`);
                                         hlsvars[cam_name].recoverMediaError();
                                         break;
                                     default:
                                     // cannot recover
-                                        hlsvars[cam_name].destroy();
+                                        console.log(`fatal media error ${data.details} encountered with ${cam_name}, cannot recover`);
+                                        killDiv(cam_name);
                                         break;
                                     }
                                 }
