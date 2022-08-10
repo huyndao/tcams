@@ -54,7 +54,24 @@
         "https://vss1live.dot.ga.gov/lo/cham-cam-104.stream/playlist.m3u8",
         "https://vss1live.dot.ga.gov/lo/cham-cam-107.stream/playlist.m3u8",
         "https://vss1live.dot.ga.gov/lo/cojc-cam-099.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cojc-cam-110.stream/playlist.m3u8"
+        "https://vss1live.dot.ga.gov/lo/cojc-cam-110.stream/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-01-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-02-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-03-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-04-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-05-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-06-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-08-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-09-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-10-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-12-01/playlist.m3u8",
+        "https://wms-prod-1.wetmet.net/live/73-07-01/playlist.m3u8",
+        "https://wms-prod-2.wetmet.net/live/222-01-01/playlist.m3u8",
+        "https://wms-prod-2.wetmet.net/live/222-02-01/playlist.m3u8",
+        "https://wms-prod-2.wetmet.net/live/222-03-01/playlist.m3u8",
+        "https://wms-prod-2.wetmet.net/live/222-04-01/playlist.m3u8",
+        "https://wms-prod-2.wetmet.net/live/222-05-01/playlist.m3u8",
+        "https://wms-prod-2.wetmet.net/live/222-06-01/playlist.m3u8"
         ];
 
         camlist.sort();
@@ -80,7 +97,7 @@
         }
       
         let playCam = (i) => { 
-            let cam_name = i.split("/")[4].split(".")[0];
+            let cam_name = "cam-" + i.split("/")[4].split(".")[0];
             let viddiv = document.createElement("div");
             viddiv.className = "video";
             viddiv.id = `div-${cam_name}`;
