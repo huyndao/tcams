@@ -1,154 +1,199 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <title>Traffic Cams</title>
-    <style type="text/css">
-      video {
-        max-width: 100%;
-        height: auto;
-        width: 640px;
-        border: 1px solid #dddddd;
-        padding: 5px;
-      }
-      video:hover {
-        border: 1px solid #F02222;
-      }
-      body {
-        margin-top: 20px;
-        background-color: #222222;
-        display: flex;
-        /* width: 100%; */
-        max-width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        flex: 0 0 auto;
-        gap: 0.1% 0.1%;
-        height: auto;
-        text-align: center;
-        margin: 0 auto;
-        justify-content: space-evenly;
-      }
-      h3 {
-          color: white;
-          text-align: center;
-      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script type="text/javascript">
-        const camlist = [
-        "https://vss1live.dot.ga.gov/lo/dek-cam-030.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-588.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-589.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-590.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-591.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-592.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-594.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-597.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-598.stream/playlist.m3u8",
-        "https://vss3live.dot.ga.gov/lo/gdot-cam-599.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cham-cam-011.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cham-cam-102.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cham-cam-103.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cham-cam-104.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cham-cam-107.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cojc-cam-099.stream/playlist.m3u8",
-        "https://vss1live.dot.ga.gov/lo/cojc-cam-110.stream/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-01-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-02-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-03-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-04-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-05-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-06-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-08-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-09-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-10-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-12-01/playlist.m3u8",
-        "https://wms-prod-1.wetmet.net/live/73-07-01/playlist.m3u8",
-        "https://wms-prod-2.wetmet.net/live/222-01-01/playlist.m3u8",
-        "https://wms-prod-2.wetmet.net/live/222-02-01/playlist.m3u8",
-        "https://wms-prod-2.wetmet.net/live/222-03-01/playlist.m3u8",
-        "https://wms-prod-2.wetmet.net/live/222-04-01/playlist.m3u8",
-        "https://wms-prod-2.wetmet.net/live/222-05-01/playlist.m3u8",
-        "https://wms-prod-2.wetmet.net/live/222-06-01/playlist.m3u8"
-        ];
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+        <meta content="utf-8" http-equiv="encoding" />
+        <title>Traffic Cams</title>
+        <style type="text/css">
+            video {
+                max-width: 100%;
+                height: auto;
+                width: 640px;
+                border: 1px solid #dddddd;
+                padding: 5px;
+            }
+            video:hover {
+                border: 1px solid #f02222;
+            }
+            body {
+                margin-top: 20px;
+                background-color: #222222;
+                display: flex;
+                /* width: 100%; */
+                max-width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                flex: 0 0 auto;
+                gap: 0.1% 0.1%;
+                height: auto;
+                text-align: center;
+                margin: 0 auto;
+                justify-content: space-evenly;
+            }
+            h3 {
+                color: white;
+                text-align: center;
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+        <script type="text/javascript">
+            const camlist = [
+                "https://d3nzocdfkx2ybv.cloudfront.net/out/cmg-wsbtvt1-rtmp-v3/live_480p30.m3u8",
+                "https://d3nzocdfkx2ybv.cloudfront.net/out/cmg-wsbtvt2-rtmp-v3/live_480p30.m3u8",
+                "https://vss1live.dot.ga.gov/lo/brok-cam-101.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/brok-cam-102.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/brok-cam-103.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/brok-cam-105.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/brok-cam-107.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/brok-cam-206.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cham-cam-011.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cham-cam-102.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cham-cam-103.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cham-cam-104.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cham-cam-107.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cojc-cam-099.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cojc-cam-110.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cojc-cam-250.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/cojc-cam-255.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/dek-cam-029.stream/playlist.m3u8",
+                "https://vss1live.dot.ga.gov/lo/dek-cam-030.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-076.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-077.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-104.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-105.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-106.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-108.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-110.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-119.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-120.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-121.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-122.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-123.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-124.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-125.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-143.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-230.stream/playlist.m3u8",
+                "https://vss2live.dot.ga.gov/lo/gdot-cam-231.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-581.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-586.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-587.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-588.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-589.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-590.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-591.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-592.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-593.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-594.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-595.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-596.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-597.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-598.stream/playlist.m3u8",
+                "https://vss3live.dot.ga.gov/lo/gdot-cam-599.stream/playlist.m3u8",
+                "https://vss4live.dot.ga.gov/lo/gdot-cam-814.stream/playlist.m3u8",
+                "https://vss4live.dot.ga.gov/lo/gdot-cam-815.stream/playlist.m3u8",
+                "https://vss4live.dot.ga.gov/lo/gdot-cam-816.stream/playlist.m3u8",
+                "https://vss4live.dot.ga.gov/lo/gdot-cam-829.stream/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-01-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-02-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-03-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-04-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-05-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-06-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-07-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-08-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-09-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-10-01/playlist.m3u8",
+                "https://wms-prod-1.wetmet.net/live/73-12-01/playlist.m3u8",
+                "https://wms-prod-2.wetmet.net/live/222-01-01/playlist.m3u8",
+                "https://wms-prod-2.wetmet.net/live/222-02-01/playlist.m3u8",
+                "https://wms-prod-2.wetmet.net/live/222-03-01/playlist.m3u8",
+                "https://wms-prod-2.wetmet.net/live/222-04-01/playlist.m3u8",
+                "https://wms-prod-2.wetmet.net/live/222-05-01/playlist.m3u8",
+                "https://wms-prod-2.wetmet.net/live/222-06-01/playlist.m3u8",
+            ];
 
-        camlist.sort();
-        const config = {
-              enableWorker: true, //Enable WebWorker (if available on browser) for TS demuxing/MP4 remuxing, to improve performance and avoid lag/frame drops.
-              startFragPrefetch: true, //Start prefetching start fragment although media not attached yet.
-              nudgeMaxRetry: 5, // Max nb of nudge retries before hls.js raise a fatal BUFFER_STALLED_ERROR
-              maxBufferLength: 10, // the minimum guaranteed buffer length that hls.js will try to achieve, even if that value exceeds the amount of bytes 60 MB of memory.
-              liveBackBufferLength: 0, // Sets the maximum length of the buffer, in seconds, to keep during a live stream. Any video buffered past this time will be evicted. Infinity means no restriction on back buffer length; 0 keeps the minimum amount. The minimum amount is equal to the target duration of a segment to ensure that current playback is not interrupted.
-              LiveMaxLatencyDuration: 10, // maximum delay allowed from edge of live, A value too close from liveSyncDuration is likely to cause playback stalls
-              liveSyncDuration: 5, // edge of live delay, A value too low (inferior to ~3 segment durations) is likely to cause playback stalls.
-              highBufferWatchdogPeriod: 1,
-              liveDurationInfinity: true // Override current Media Source duration to Infinity for a live broadcast. Useful, if you are building a player which relies on native UI capabilities in modern browsers. If you want to have a native Live UI in environments like iOS Safari, Safari, Android Google Chrome, etc. set this value to true
-        };
-        let camvars = {};
-        let hlsvars = {};
-        let killDiv = (i) => {
-            hlsvars[i].destroy();
-            delete hlsvars[i];
-            delete camvars[i];
-            document.querySelector(`#${i}`).remove();
-            document.querySelector(`#div-${i}`).remove();
-        }
-      
-        let playCam = (i) => { 
-            let cam_name = "cam-" + i.split("/")[4].split(".")[0];
-            let viddiv = document.createElement("div");
-            viddiv.className = "video";
-            viddiv.id = `div-${cam_name}`;
-            viddiv.innerHTML = `<video id="${cam_name}" controls autoplay muted></video>`;
-            document.body.appendChild(viddiv);
+            camlist.sort();
+            const config = {
+                enableWorker: true, //Enable WebWorker (if available on browser) for TS demuxing/MP4 remuxing, to improve performance and avoid lag/frame drops.
+                lowLatencyMode: true,
+                startFragPrefetch: true, //Start prefetching start fragment although media not attached yet.
+                nudgeMaxRetry: 5, // Max nb of nudge retries before hls.js raise a fatal BUFFER_STALLED_ERROR
+                maxBufferLength: 10, // the minimum guaranteed buffer length that hls.js will try to achieve, even if that value exceeds the amount of bytes 60 MB of memory.
+                liveBackBufferLength: 0, // Sets the maximum length of the buffer, in seconds, to keep during a live stream. Any video buffered past this time will be evicted. Infinity means no restriction on back buffer length; 0 keeps the minimum amount. The minimum amount is equal to the target duration of a segment to ensure that current playback is not interrupted.
+                LiveMaxLatencyDuration: 10, // maximum delay allowed from edge of live, A value too close from liveSyncDuration is likely to cause playback stalls
+                liveSyncDuration: 5, // edge of live delay, A value too low (inferior to ~3 segment durations) is likely to cause playback stalls.
+                highBufferWatchdogPeriod: 1,
+                liveDurationInfinity: true, // Override current Media Source duration to Infinity for a live broadcast. Useful, if you are building a player which relies on native UI capabilities in modern browsers. If you want to have a native Live UI in environments like iOS Safari, Safari, Android Google Chrome, etc. set this value to true
+            };
+            let camvars = {};
+            let hlsvars = {};
+            let killDiv = (i) => {
+                hlsvars[i].destroy();
+                delete hlsvars[i];
+                delete camvars[i];
+                document.querySelector(`#${i}`).remove();
+                document.querySelector(`#div-${i}`).remove();
+            };
 
-            camvars[cam_name] = document.querySelector("#" + cam_name);
+            let playCam = (i) => {
+                let cam_name = "cam-" + i.split("/")[4].split(".")[0];
+                let viddiv = document.createElement("div");
+                viddiv.className = "video";
+                viddiv.id = `div-${cam_name}`;
+                viddiv.innerHTML = `<video id="${cam_name}" controls autoplay muted></video>`;
+                document.body.appendChild(viddiv);
 
-            if (Hls.isSupported()){
-                        hlsvars[cam_name] = new Hls(config);
-                        hlsvars[cam_name].attachMedia(camvars[cam_name]);
-                        hlsvars[cam_name].on(
-                            Hls.Events.MEDIA_ATTACHED, () => {
-                                hlsvars[cam_name].loadSource(i);
-                                hlsvars[cam_name].on(
-                                    Hls.Events.MANIFEST_PARSED, () => {
-                                        camvars[cam_name].play(); 
-                                    }
-                                );
-                            }
-                        );
+                camvars[cam_name] = document.querySelector("#" + cam_name);
 
-                        hlsvars[cam_name].on(
-                            Hls.Events.ERROR, (event, data) => {
-                                if (data.fatal) {
-                                    switch(data.type) {
-                                    case Hls.ErrorTypes.NETWORK_ERROR:
+                if (Hls.isSupported()) {
+                    hlsvars[cam_name] = new Hls(config);
+                    hlsvars[cam_name].attachMedia(camvars[cam_name]);
+                    hlsvars[cam_name].on(Hls.Events.MEDIA_ATTACHED, () => {
+                        hlsvars[cam_name].loadSource(i);
+                        hlsvars[cam_name].on(Hls.Events.MANIFEST_PARSED, () => {
+                            camvars[cam_name].play();
+                        });
+                    });
+
+                    hlsvars[cam_name].on(Hls.Events.ERROR, (event, data) => {
+                        if (data.fatal) {
+                            switch (data.type) {
+                                case Hls.ErrorTypes.NETWORK_ERROR:
                                     // try to recover network error
-                                        console.log(`fatal network error ${data.details} encountered with ${cam_name}, try to recover`);
-                                        hlsvars[cam_name].startLoad();
-                                        if (data.details.toLowerCase() === "manifestloaderror") { killDiv(cam_name); }
-                                        break;
-                                    case Hls.ErrorTypes.MEDIA_ERROR:
-                                        console.log(`fatal media error ${data.details} encountered with ${cam_name}, try to recover`);
-                                        hlsvars[cam_name].recoverMediaError();
-                                        break;
-                                    default:
-                                    // cannot recover
-                                        console.log(`fatal media error ${data.details} encountered with ${cam_name}, cannot recover`);
+                                    console.log(
+                                        `fatal network error ${data.details} encountered with ${cam_name}, try to recover`
+                                    );
+                                    hlsvars[cam_name].startLoad();
+                                    if (
+                                        data.details.toLowerCase() ===
+                                        "manifestloaderror"
+                                    ) {
                                         killDiv(cam_name);
-                                        break;
                                     }
-                                }
+                                    break;
+                                case Hls.ErrorTypes.MEDIA_ERROR:
+                                    console.log(
+                                        `fatal media error ${data.details} encountered with ${cam_name}, try to recover`
+                                    );
+                                    hlsvars[cam_name].recoverMediaError();
+                                    break;
+                                default:
+                                    // cannot recover
+                                    console.log(
+                                        `fatal media error ${data.details} encountered with ${cam_name}, cannot recover`
+                                    );
+                                    killDiv(cam_name);
+                                    break;
                             }
-                        );
-                    }
+                        }
+                    });
                 }
+            };
 
-        window.onload = () => {camlist.map(playCam);}
-    </script>
-  </head>
-  <body>
-  </body>
+            window.onload = () => {
+                camlist.map(playCam);
+            };
+        </script>
+    </head>
+    <body></body>
 </html>
